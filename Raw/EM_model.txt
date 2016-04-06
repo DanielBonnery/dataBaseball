@@ -1,0 +1,13 @@
+model
+{
+    for (i in 1:18) {
+        theta.hat[i] ~ dnorm(theta[i], 1)
+        theta[i] <- beta0 + beta1 * u[i] + v[i]
+        p[i] <- (sin(theta[i]/sqrt(45)) + 1)/2
+        v[i] ~ dnorm(0.00000E+00, tau)
+    }
+    tau <- pow(sigma, -2)
+    sigma ~ dunif(0.00000E+00, 100)
+    beta0 ~ dnorm(0.00000E+00, 0.001)
+    beta1 ~ dnorm(0.00000E+00, 0.001)
+}
